@@ -1,13 +1,49 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_knowledgebattle/battle_arena
+
+    Battle arena interface for taking a quiz battle.
+
+    Example context (json):
+    {
+        "current_question": 1,
+        "total_questions": 5,
+        "time_limit": 15,
+        "opponent_name": "AI Master",
+        "question": {
+            "text": "What is the capital of France?",
+            "options": [
+                {"index": 0, "letter": "A", "text": "Paris"},
+                {"index": 1, "letter": "B", "text": "London"}
+            ]
+        }
+    }
+}}
 <div class="knowledgebattle-arena">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="m-0">Questão <span id="current-question-num">{{current_question}}</span> de {{total_questions}}</h4>
+        <h4 class="m-0">{{#str}}tpl_question_x_of_y, mod_knowledgebattle, {"current":"{{current_question}}","total":"{{total_questions}}"}{{/str}}</h4>
         <div class="timer-badge bg-primary text-white px-3 py-1 rounded-pill h5 m-0">
             <i class="fa fa-clock-o"></i> <span id="time-left">{{time_limit}}</span>s
         </div>
     </div>
 
     <div class="match-info text-center mb-4 text-muted">
-        <strong>Você</strong> vs <strong>{{opponent_name}}</strong>
+        <strong>{{#str}}tpl_you, mod_knowledgebattle{{/str}}</strong> {{#str}}tpl_vs, mod_knowledgebattle{{/str}} <strong>{{opponent_name}}</strong>
     </div>
 
     <div class="progress mb-4" style="height: 10px;">
@@ -28,13 +64,15 @@
             </div>
             
             <div id="feedback-container" class="mt-4 p-3 rounded d-none">
-                <h5 id="feedback-title"></h5>
+                <h5 id="feedback-title">{{#str}}feedback, core{{/str}}</h5>
                 <p id="feedback-explanation" class="mb-0"></p>
             </div>
         </div>
     </div>
 
     <div class="text-center">
-        <button id="btn-next-question" class="btn btn-primary btn-lg d-none px-5">Próxima Questão <i class="fa fa-arrow-right"></i></button>
+        <button class="btn btn-primary btn-lg px-5 d-none" id="btn-next-question">
+            {{#str}}tpl_next_question, mod_knowledgebattle{{/str}} <i class="fa fa-arrow-right"></i>
+        </button>
     </div>
 </div>
