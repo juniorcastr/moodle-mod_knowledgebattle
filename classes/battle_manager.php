@@ -123,6 +123,8 @@ class battle_manager {
      *
      * @param int $battleid
      * @param int $count
+     * @param int $player1id
+     * @param int|null $player2id
      * @return array
      * @throws \moodle_exception
      */

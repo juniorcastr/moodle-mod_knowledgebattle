@@ -62,8 +62,10 @@ final class backup_restore_test extends \advanced_testcase {
         $newcourse = $this->getDataGenerator()->create_course();
         $rc = new \restore_controller($backupid, $newcourse->id, \backup::INTERACTIVE_NO,
             \backup::MODE_GENERAL, $USER->id, \backup::TARGET_NEW_COURSE);
-        $rc->get_plan()->get_setting('users')->set_value($userdata);
         $this->assertTrue($rc->execute_precheck());
+        if ($rc->get_plan()->setting_exists('users')) {
+            $rc->get_plan()->get_setting('users')->set_value($userdata);
+        }
         $rc->execute_plan();
         $rc->destroy();
 

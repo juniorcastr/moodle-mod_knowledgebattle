@@ -1,3 +1,38 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_knowledgebattle/battle_result
+
+    Displays the battle outcome screen with scores and question review.
+
+    Example context (json):
+    {
+        "is_win": true,
+        "is_loss": false,
+        "is_draw": false,
+        "points_earned": "+10",
+        "user_score": 5,
+        "user_time": "1200",
+        "opp_score": 3,
+        "opp_time": "1500",
+        "opponent_name": "Bob",
+        "has_review": false
+    }
+}}
 <div class="knowledgebattle-result text-center">
     <div class="result-header mb-4 p-5 rounded {{#is_win}}bg-success{{/is_win}} {{#is_loss}}bg-danger{{/is_loss}} {{#is_draw}}bg-warning text-dark{{/is_draw}} text-white shadow-sm">
         <h1 class="display-3 font-weight-bold mb-3">

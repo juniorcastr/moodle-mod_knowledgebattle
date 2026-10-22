@@ -32,14 +32,21 @@ defined('MOODLE_INTERNAL') || die();
  * @return mixed True if yes (some features may use other values)
  */
 function knowledgebattle_supports($feature) {
-    switch($feature) {
-        case FEATURE_GRADE_HAS_GRADE: return true;
-        case FEATURE_BACKUP_MOODLE2: return true;
-        case FEATURE_MOD_INTRO: return true;
-        case FEATURE_SHOW_DESCRIPTION: return true;
-        case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
-        case FEATURE_COMPLETION_HAS_RULES: return true;
-        default: return null;
+    switch ($feature) {
+        case FEATURE_GRADE_HAS_GRADE:
+            return true;
+        case FEATURE_BACKUP_MOODLE2:
+            return true;
+        case FEATURE_MOD_INTRO:
+            return true;
+        case FEATURE_SHOW_DESCRIPTION:
+            return true;
+        case FEATURE_COMPLETION_TRACKS_VIEWS:
+            return true;
+        case FEATURE_COMPLETION_HAS_RULES:
+            return true;
+        default:
+            return null;
     }
 }
 
@@ -120,7 +127,7 @@ function knowledgebattle_delete_instance($id) {
     $matches = $DB->get_records('knowledgebattle_matches', ['battleid' => $id]);
     if ($matches) {
         $matchids = array_keys($matches);
-        list($insql, $inparams) = $DB->get_in_or_equal($matchids);
+        [$insql, $inparams] = $DB->get_in_or_equal($matchids);
         
         $DB->delete_records_select('knowledgebattle_turns', "matchid $insql", $inparams);
         $DB->delete_records_select('knowledgebattle_match_questions', "matchid $insql", $inparams);

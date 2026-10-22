@@ -1,3 +1,38 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_knowledgebattle/report
+
+    Displays the analytics and reporting dashboard for teachers.
+
+    Example context (json):
+    {
+        "cmid": 1,
+        "sesskey": "abc123xyz",
+        "stats_summary": {
+            "total_matches": 100,
+            "completed_matches": 85,
+            "wo_matches": 15,
+            "active_students": 30,
+            "unique_players": 40,
+            "avg_accuracy_pct": "75.5%"
+        }
+    }
+}}
 <div class="mod-knowledgebattle-report">
 <div class="knowledgebattle-report">
     <!-- Header Action Bar -->

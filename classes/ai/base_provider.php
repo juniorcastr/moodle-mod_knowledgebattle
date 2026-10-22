@@ -182,6 +182,12 @@ Do not include markdown blocks or any other text, just the JSON.";
 
     /**
      * Template method to generate the quiz. Subclasses must implement the abstract methods to format the API call.
+     *
+     * @param string $context The text content used to generate questions.
+     * @param int $count Number of questions to generate.
+     * @param string $difficulty Question difficulty (easy, medium, hard).
+     * @param string $language Target language name.
+     * @return array Array of generated questions.
      */
     public function generate_quiz(string $context, int $count, string $difficulty = 'medium', string $language = 'English'): array {
         $prompt = $this->build_quiz_prompt($context, $count, $difficulty, $language);

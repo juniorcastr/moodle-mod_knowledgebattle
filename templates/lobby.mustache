@@ -1,3 +1,42 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_knowledgebattle/lobby
+
+    Main lobby interface for the knowledgebattle activity.
+
+    Example context (json):
+    {
+        "battleid": 1,
+        "cmid": 10,
+        "show_toolbar": true,
+        "has_manage": true,
+        "has_report": true,
+        "questions_url": "http://example.com/questions.php",
+        "report_url": "http://example.com/report.php",
+        "has_enough_questions": true,
+        "user_stats": {
+            "current_points": 150,
+            "wins": 10,
+            "current_streak": 3,
+            "max_streak": 5
+        }
+    }
+}}
 <div class="mod-knowledgebattle" id="knowledgebattle-content" data-battleid="{{battleid}}" data-cmid="{{cmid}}">
 {{#show_toolbar}}
 <div class="mb-3 d-flex flex-wrap align-items-center">

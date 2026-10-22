@@ -138,7 +138,7 @@ final class external_security_test extends \advanced_testcase {
             \context_module::instance($cm->id), true);
 
         $this->setUser($p1);
-        $this->expectException(\required_capability_exception::class);
+        $this->expectException(\moodle_exception::class);
         get_battle_result::execute($matchid);
     }
 

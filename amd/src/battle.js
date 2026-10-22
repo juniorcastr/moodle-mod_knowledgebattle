@@ -170,8 +170,10 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates'
             $(document).on('click', '#btn-rematch', function() {
                 var btnMatchtype = $(this).data('matchtype');
                 var btnOpponentid = $(this).data('opponentid');
-                var matchType = (btnMatchtype !== undefined && btnMatchtype !== '') ? parseInt(btnMatchtype, 10) : (self.lastMatchType || 2);
-                var opponentId = (btnOpponentid !== undefined && btnOpponentid !== '') ? parseInt(btnOpponentid, 10) : (self.lastOpponentId || 0);
+                var matchType = (btnMatchtype !== undefined && btnMatchtype !== '')
+                    ? parseInt(btnMatchtype, 10) : (self.lastMatchType || 2);
+                var opponentId = (btnOpponentid !== undefined && btnOpponentid !== '')
+                    ? parseInt(btnOpponentid, 10) : (self.lastOpponentId || 0);
 
                 if (matchType === 1 && !opponentId) {
                     matchType = 2;
@@ -192,9 +194,14 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates'
             var self = this;
             var battleId = self.getBattleId();
             if (!battleId) {
-                Notification.alert(self.str('code_js_error'), self.str('code_js_battleid_missing'), self.str('code_js_reload'), function() {
-                    window.location.reload();
-                });
+                Notification.alert(
+                    self.str('code_js_error'),
+                    self.str('code_js_battleid_missing'),
+                    self.str('code_js_reload'),
+                    function() {
+                        window.location.reload();
+                    }
+                );
                 return;
             }
 
@@ -348,9 +355,13 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates'
                 $('#battle-progress').css('width', pct + '%');
 
                 if (response.is_last_question) {
-                    $('#btn-next-question').html(self.str('code_js_view_result') + ' <i class="fa fa-flag-checkered"></i>').removeClass('d-none');
+                    $('#btn-next-question')
+                        .html(self.str('code_js_view_result') + ' <i class="fa fa-flag-checkered"></i>')
+                        .removeClass('d-none');
                 } else {
-                    $('#btn-next-question').html(self.str('code_js_next_question') + ' <i class="fa fa-arrow-right"></i>').removeClass('d-none');
+                    $('#btn-next-question')
+                        .html(self.str('code_js_next_question') + ' <i class="fa fa-arrow-right"></i>')
+                        .removeClass('d-none');
                 }
             }).fail(Notification.exception);
         },
@@ -424,7 +435,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates'
                     str_you_won: self.str('str_you_won'),
                     str_you_lost: self.str('str_you_lost'),
                     str_draw: self.str('str_draw'),
-                    points_earned: self.str('code_js_points_earned').replace('{POINTS}', (data.points_earned >= 0 ? '+' : '') + data.points_earned),
+                    points_earned: self.str('code_js_points_earned')
+                        .replace('{POINTS}', (data.points_earned >= 0 ? '+' : '') + data.points_earned),
                     user_score: uScore,
                     opp_score: oScore,
                     user_time: uTime,
@@ -458,9 +470,14 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates'
             var self = this;
             var battleId = self.getBattleId();
             if (!battleId) {
-                Notification.alert(self.str('code_js_error'), self.str('code_js_battleid_missing'), self.str('code_js_reload'), function() {
-                    window.location.reload();
-                });
+                Notification.alert(
+                    self.str('code_js_error'),
+                    self.str('code_js_battleid_missing'),
+                    self.str('code_js_reload'),
+                    function() {
+                        window.location.reload();
+                    }
+                );
                 return;
             }
 

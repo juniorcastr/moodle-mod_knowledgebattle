@@ -90,9 +90,14 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function($, Aja
 
                 var battleId = self.getBattleId();
                 if (!battleId) {
-                    Notification.alert(self.str('code_js_error'), self.str('code_js_battleid_missing'), self.str('code_js_reload'), function() {
-                        window.location.reload();
-                    });
+                    Notification.alert(
+                        self.str('code_js_error'),
+                        self.str('code_js_battleid_missing'),
+                        self.str('code_js_reload'),
+                        function() {
+                            window.location.reload();
+                        }
+                    );
                     $btn.attr('disabled', false).html('<i class="fa fa-magic"></i> ' + self.str('code_js_generate_questions'));
                     return;
                 }
@@ -187,16 +192,24 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function($, Aja
             };
 
             if (fields) {
-                if (fields.question_text !== undefined) args.question_text = fields.question_text;
-                if (fields.options_json !== undefined) args.options_json = fields.options_json;
-                if (fields.correct_index !== undefined) args.correct_index = fields.correct_index;
-                if (fields.explanation !== undefined) args.explanation = fields.explanation;
+                if (fields.question_text !== undefined) {
+                    args.question_text = fields.question_text;
+                }
+                if (fields.options_json !== undefined) {
+                    args.options_json = fields.options_json;
+                }
+                if (fields.correct_index !== undefined) {
+                    args.correct_index = fields.correct_index;
+                }
+                if (fields.explanation !== undefined) {
+                    args.explanation = fields.explanation;
+                }
             }
 
             Ajax.call([{
                 methodname: 'mod_knowledgebattle_manage_question',
                 args: args
-            }])[0].then(function(response) {
+            }])[0].then(function() {
                 Notification.addNotification({
                     message: self.str('code_js_question_updated'),
                     type: 'success'
