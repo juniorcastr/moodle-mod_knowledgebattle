@@ -47,7 +47,7 @@ final class backup_restore_test extends \advanced_testcase {
      * @return \stdClass The new course.
      */
     private function copy_course(\stdClass $course, bool $userdata): \stdClass {
-        global $CFG, $USER;
+        global $CFG, $USER, $DB;
 
         $this->setAdminUser();
         $CFG->backup_file_logger_level = \backup::LOG_NONE;
@@ -55,21 +55,29 @@ final class backup_restore_test extends \advanced_testcase {
         $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
             \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $USER->id);
         $bc->get_plan()->get_setting('users')->set_value($userdata);
-        $backupid = $bc->get_backupid();
         $bc->execute_plan();
+        $results = $bc->get_results();
+        $file = $results['backup_destination'];
+        $backupdir = \restore_controller::get_tempdir_name($course->id, $USER->id);
+        $path = make_backup_temp_directory($backupdir);
+        $fp = get_file_packer('application/vnd.moodle.backup');
+        $file->extract_to_pathname($fp, $path);
         $bc->destroy();
 
-        $newcourse = $this->getDataGenerator()->create_course();
-        $rc = new \restore_controller($backupid, $newcourse->id, \backup::INTERACTIVE_NO,
+        $newcourseid = \restore_dbops::create_new_course(
+            $course->fullname, $course->shortname . '_copy', $course->category);
+        $rc = new \restore_controller($backupdir, $newcourseid, \backup::INTERACTIVE_NO,
             \backup::MODE_GENERAL, $USER->id, \backup::TARGET_NEW_COURSE);
-        $this->assertTrue($rc->execute_precheck());
         if ($rc->get_plan()->setting_exists('users')) {
             $rc->get_plan()->get_setting('users')->set_value($userdata);
         }
+        $this->assertTrue($rc->execute_precheck());
         $rc->execute_plan();
         $rc->destroy();
 
-        return $newcourse;
+        fulldelete($path);
+
+        return $DB->get_record('course', ['id' => $newcourseid]);
     }
 
     /**
